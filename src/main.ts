@@ -114,6 +114,22 @@ if (form && statusEl) {
       message: String(data.get('message') || ''),
     };
 
+    const localErrors: string[] = [];
+    if (payload.name.trim().length < 2) {
+      localErrors.push('Name must be at least 2 characters.');
+    }
+    if (!/^\S+@\S+\.\S+$/.test(payload.email.trim())) {
+      localErrors.push('Email is not valid.');
+    }
+    if (payload.message.trim().length < 10) {
+      localErrors.push('Message must be at least 10 characters.');
+    }
+
+    if (localErrors.length > 0) {
+      statusEl.textContent = localErrors[0];
+      return;
+    }
+
     statusEl.textContent = 'Sending...';
 
     try {
@@ -124,8 +140,11 @@ if (form && statusEl) {
       });
 
       if (!response.ok) {
-        const body = (await response.json().catch(() => null)) as { error?: string } | null;
-        const errorMessage = body?.error || `Request failed (${response.status})`;
+        const body = (await response.json().catch(() => null)) as
+          | { error?: string; details?: string[] }
+          | null;
+        const detail = body?.details?.[0];
+        const errorMessage = detail || body?.error || `Request failed (${response.status})`;
         throw new Error(errorMessage);
       }
 

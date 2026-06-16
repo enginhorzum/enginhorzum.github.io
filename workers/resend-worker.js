@@ -29,8 +29,22 @@ export default {
       const email = String(body.email || '').trim();
       const message = String(body.message || '').trim();
 
-      if (name.length < 2 || !email.includes('@') || message.length < 10) {
-        return json({ error: 'Invalid payload' }, 400, allowedOrigin);
+      const errors = [];
+
+      if (name.length < 2) {
+        errors.push('Name must be at least 2 characters.');
+      }
+
+      if (!/^\S+@\S+\.\S+$/.test(email)) {
+        errors.push('Email is not valid.');
+      }
+
+      if (message.length < 10) {
+        errors.push('Message must be at least 10 characters.');
+      }
+
+      if (errors.length > 0) {
+        return json({ error: 'Invalid payload', details: errors }, 400, allowedOrigin);
       }
 
       const resendResponse = await fetch('https://api.resend.com/emails', {
