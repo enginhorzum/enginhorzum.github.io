@@ -103,7 +103,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <section id="contact" class="section reveal">
       <div class="section-head">
         <p class="kicker">Contact</p>
-        <h2>New message from your website</h2>
+        <h2>Tell me about your project.</h2>
       </div>
       <form id="contact-form" class="contact-form">
         <label>
