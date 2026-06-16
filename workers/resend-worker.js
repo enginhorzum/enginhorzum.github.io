@@ -27,6 +27,7 @@ export default {
       const body = await request.json();
       const name = String(body.name || '').trim();
       const email = String(body.email || '').trim();
+      const subject = String(body.subject || '').trim();
       const message = String(body.message || '').trim();
 
       const errors = [];
@@ -37,6 +38,10 @@ export default {
 
       if (!/^\S+@\S+\.\S+$/.test(email)) {
         errors.push('Email is not valid.');
+      }
+
+      if (subject.length < 2) {
+        errors.push('Subject must be at least 2 characters.');
       }
 
       if (message.length < 10) {
@@ -56,9 +61,10 @@ export default {
         body: JSON.stringify({
           from: env.RESEND_FROM,
           to: ['enginhorzum@gmail.com'],
-          subject: `Website message from ${name}`,
+          subject: `New message from your website: ${subject}`,
           reply_to: email,
-          text: message,
+          text: `New message from your website\nFrom: ${name} <${email}>\n\nSubject: ${subject}\n\n${message}`,
+          html: `<h2>New message from your website</h2><p><strong>From:</strong> ${escapeHtml(name)} &lt;${escapeHtml(email)}&gt;</p><p><strong>Subject:</strong> ${escapeHtml(subject)}</p><p>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>`,
         }),
       });
 
@@ -80,6 +86,15 @@ function getAllowedOrigins(env) {
     .split(',')
     .map((origin) => origin.trim())
     .filter(Boolean);
+}
+
+function escapeHtml(value) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
 
 function resolveAllowedOrigin(requestOrigin, allowedOrigins) {

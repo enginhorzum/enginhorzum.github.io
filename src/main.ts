@@ -99,6 +99,10 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <input type="email" name="email" required maxlength="120" />
         </label>
         <label>
+          Subject
+          <input type="text" name="subject" required minlength="2" maxlength="120" />
+        </label>
+        <label>
           Message
           <textarea name="message" rows="5" required minlength="10" maxlength="2000"></textarea>
         </label>
@@ -177,19 +181,23 @@ if (form && statusEl) {
     const payload = {
       name: String(data.get('name') || ''),
       email: String(data.get('email') || ''),
+      subject: String(data.get('subject') || ''),
       message: String(data.get('message') || ''),
     };
 
     payload.name = payload.name.trim();
     payload.email = payload.email.trim();
+    payload.subject = payload.subject.trim();
     payload.message = payload.message.trim();
 
     const nameInput = form.querySelector<HTMLInputElement>('input[name="name"]');
     const emailInput = form.querySelector<HTMLInputElement>('input[name="email"]');
+    const subjectInput = form.querySelector<HTMLInputElement>('input[name="subject"]');
     const messageInput = form.querySelector<HTMLTextAreaElement>('textarea[name="message"]');
 
     if (nameInput) nameInput.value = payload.name;
     if (emailInput) emailInput.value = payload.email;
+    if (subjectInput) subjectInput.value = payload.subject;
     if (messageInput) messageInput.value = payload.message;
 
     if (!form.checkValidity()) {
@@ -204,6 +212,9 @@ if (form && statusEl) {
     }
     if (!/^\S+@\S+\.\S+$/.test(payload.email.trim())) {
       localErrors.push('Email is not valid.');
+    }
+    if (payload.subject.trim().length < 2) {
+      localErrors.push('Subject must be at least 2 characters.');
     }
     if (payload.message.trim().length < 10) {
       localErrors.push('Message must be at least 10 characters.');
