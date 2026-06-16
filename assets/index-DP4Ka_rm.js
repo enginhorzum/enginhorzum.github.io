@@ -1,12 +1,12 @@
 (function(){let e=document.createElement(`link`).relList;if(e&&e.supports&&e.supports(`modulepreload`))return;for(let e of document.querySelectorAll(`link[rel="modulepreload"]`))n(e);new MutationObserver(e=>{for(let t of e)if(t.type===`childList`)for(let e of t.addedNodes)e.tagName===`LINK`&&e.rel===`modulepreload`&&n(e)}).observe(document,{childList:!0,subtree:!0});function t(e){let t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin===`use-credentials`?t.credentials=`include`:e.crossOrigin===`anonymous`?t.credentials=`omit`:t.credentials=`same-origin`,t}function n(e){if(e.ep)return;e.ep=!0;let n=t(e);fetch(e.href,n)}})(),document.querySelector(`#app`).innerHTML=`
-  <div class="aurora aurora-a"></div>
-  <div class="aurora aurora-b"></div>
+  <div class="halo halo-a"></div>
+  <div class="halo halo-b"></div>
 
-  <header class="topbar glass reveal">
+  <header class="topbar reveal">
     <a href="#home" class="brand"><span class="brand-mark">EH</span> Engin Horzum</a>
     <nav>
-      <a href="#solutions">Solutions</a>
-      <a href="#proof">Proof</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
     <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color mode">Light</button>
@@ -14,80 +14,96 @@
 
   <main>
     <section id="home" class="hero reveal">
-      <p class="kicker">Software Engineer · Solution Architect</p>
-      <h1>Enterprise software that ships fast, scales hard, and stays maintainable.</h1>
+      <p class="kicker">Software Developer · Solution Architect · .NET & Azure</p>
+      <h1>Premium engineering for products that cannot fail in production.</h1>
       <p class="subhead">
-        I design high-trust .NET and Azure platforms for teams that cannot afford downtime, delivery drag,
-        or brittle architecture. Built with product-level polish and operations-level discipline.
+        I help teams design and ship resilient backend platforms, integration systems, and cloud delivery pipelines.
+        Focused on reliability, maintainability, and execution speed.
       </p>
       <div class="hero-actions">
-        <a class="btn primary" href="#contact">Start a Conversation</a>
-        <a class="btn ghost" href="https://blog.enginhorzum.com" target="_blank" rel="noreferrer">Read Technical Notes</a>
+        <a class="btn primary" href="#contact">Let's Build Together</a>
+        <a class="btn ghost" href="https://blog.enginhorzum.com" target="_blank" rel="noreferrer">Read Blog</a>
       </div>
-      <div class="metrics glass">
-        <div><strong>20+</strong><span>Years in engineering</span></div>
-        <div><strong>8</strong><span>Major brands served</span></div>
+      <div class="metrics">
+        <div><strong>20+</strong><span>Years in software engineering</span></div>
+        <div><strong>8</strong><span>Companies and enterprise domains</span></div>
         <div><strong>4</strong><span>Industry certifications</span></div>
       </div>
     </section>
 
-    <section id="solutions" class="section reveal">
+    <section id="experience" class="section reveal">
       <div class="section-head">
-        <p class="kicker">What I Deliver</p>
-        <h2>Product-grade engineering systems for serious teams.</h2>
+        <p class="kicker">Experience</p>
+        <h2>Full timeline</h2>
       </div>
-      <div class="grid-cards">
-        <article class="glass card">
-          <h3>Cloud Backbone</h3>
-          <p>Azure-native architecture, observability, and reliability patterns designed for real production load.</p>
+      <div class="timeline">
+        <article>
+          <span>11/2023 - Present</span>
+          <h3>Integration Developer · Vattenfall</h3>
+          <p>Amsterdam - Netherlands</p>
         </article>
-        <article class="glass card">
-          <h3>Integration Platforms</h3>
-          <p>Stable APIs, event workflows, and service orchestration that keep cross-team delivery moving.</p>
+        <article>
+          <span>10/2020 - 10/2023</span>
+          <h3>Software Developer · T-Mobile Netherlands</h3>
+          <p>Den Haag - Netherlands</p>
         </article>
-        <article class="glass card">
-          <h3>Developer Velocity</h3>
-          <p>CI/CD and DevOps standards that reduce release friction and improve confidence in every deploy.</p>
+        <article>
+          <span>06/2020 - 10/2020</span>
+          <h3>Software Developer / DevOps · Soulve Innovations</h3>
+          <p>Utrecht - Netherlands</p>
+        </article>
+        <article>
+          <span>08/2019 - 06/2020</span>
+          <h3>Senior Software Developer · Bruna B.V.</h3>
+          <p>Amsterdam - Netherlands</p>
+        </article>
+        <article>
+          <span>09/2018 - 08/2019</span>
+          <h3>Software Developer · Facevalue B.V.</h3>
+          <p>Hilversum - Netherlands</p>
+        </article>
+        <article>
+          <span>02/2009 - 06/2018</span>
+          <h3>Solution Architect · AXA Insurance</h3>
+          <p>Istanbul - Turkey</p>
+        </article>
+        <article>
+          <span>07/2006 - 02/2009</span>
+          <h3>Software Developer · Anadolu Bilisim Hizmetleri</h3>
+          <p>Istanbul - Turkey</p>
+        </article>
+        <article>
+          <span>12/2004 - 12/2005</span>
+          <h3>Software Developer · Ericsson</h3>
+          <p>Istanbul - Turkey</p>
         </article>
       </div>
     </section>
 
-    <section id="proof" class="section reveal">
+    <section id="education" class="section reveal">
       <div class="section-head">
-        <p class="kicker">Selected Experience</p>
-        <h2>Trusted by large organizations across energy, telecom, retail, and insurance.</h2>
+        <p class="kicker">Education & Certifications</p>
+        <h2>Academic foundation and credentials</h2>
       </div>
-      <div class="timeline glass">
-        <article>
-          <span>2023 - Present</span>
-          <h3>Integration Developer · Vattenfall</h3>
-          <p>Amsterdam, Netherlands</p>
-        </article>
-        <article>
-          <span>2020 - 2023</span>
-          <h3>Software Developer · T-Mobile Netherlands</h3>
-          <p>Den Haag, Netherlands</p>
-        </article>
-        <article>
-          <span>2009 - 2018</span>
-          <h3>Solution Architect · AXA Insurance</h3>
-          <p>Istanbul, Turkey</p>
-        </article>
-      </div>
+      <article class="education-card">
+        <span>1999 - 2004</span>
+        <h3>Bachelor of Science in Computer Engineering</h3>
+        <p>Izmir Institute of Technology</p>
+      </article>
       <div class="badge-row">
-        <span>Microsoft Azure Solutions Architect Expert</span>
-        <span>Microsoft Azure Fundamentals</span>
-        <span>Professional Scrum Master I</span>
-        <span>Project Management Professional</span>
+        <span>Microsoft Certified: Azure Solutions Architect Expert (2020)</span>
+        <span>Microsoft Certified: Azure Fundamentals (2020)</span>
+        <span>Professional Scrum Master I (2020)</span>
+        <span>Project Management Professional (2013)</span>
       </div>
     </section>
 
     <section id="contact" class="section reveal">
       <div class="section-head">
-        <p class="kicker">Let Us Build Something Exceptional</p>
-        <h2>Tell me what you are building. I will reply directly.</h2>
+        <p class="kicker">Contact</p>
+        <h2>New message from your website</h2>
       </div>
-      <form id="contact-form" class="glass contact-form">
+      <form id="contact-form" class="contact-form">
         <label>
           Name
           <input type="text" name="name" required minlength="2" maxlength="80" />
