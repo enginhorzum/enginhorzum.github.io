@@ -3,5 +3,5 @@ main = "resend-worker.js"
 compatibility_date = "2026-06-16"
 
 [vars]
-ALLOWED_ORIGIN = "https://your-github-pages-or-custom-domain"
+ALLOWED_ORIGINS = "https://your-github-pages-domain,https://your-custom-domain"
 RESEND_FROM = "Portfolio Contact <onboarding@resend.dev>"

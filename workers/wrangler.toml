@@ -3,5 +3,5 @@ main = "resend-worker.js"
 compatibility_date = "2026-06-16"
 
 [vars]
-ALLOWED_ORIGIN = "https://enginhorzum.com"
+ALLOWED_ORIGINS = "https://enginhorzum.com,https://enginhorzum.github.io"
 RESEND_FROM = "Portfolio Contact <onboarding@resend.dev>"

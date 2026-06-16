@@ -124,13 +124,16 @@ if (form && statusEl) {
       });
 
       if (!response.ok) {
-        throw new Error('Request failed');
+        const body = (await response.json().catch(() => null)) as { error?: string } | null;
+        const errorMessage = body?.error || `Request failed (${response.status})`;
+        throw new Error(errorMessage);
       }
 
       form.reset();
       statusEl.textContent = 'Thanks. Your message has been sent.';
-    } catch {
-      statusEl.textContent = 'Something went wrong. Please try again later.';
+    } catch (error) {
+      statusEl.textContent =
+        error instanceof Error ? error.message : 'Something went wrong. Please try again later.';
     }
   });
 }
