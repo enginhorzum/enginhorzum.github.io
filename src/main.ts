@@ -74,18 +74,18 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <section class="panel" id="contact">
       <h2>Contact</h2>
       <p>Send me a message and I will get back to you via enginhorzum@gmail.com.</p>
-      <form id="contact-form" novalidate>
+      <form id="contact-form">
         <label>
           Name
-          <input type="text" name="name" required minlength="2" />
+          <input type="text" name="name" required minlength="2" maxlength="80" />
         </label>
         <label>
           Email
-          <input type="email" name="email" required />
+          <input type="email" name="email" required maxlength="120" />
         </label>
         <label>
           Message
-          <textarea name="message" rows="5" required minlength="10"></textarea>
+          <textarea name="message" rows="5" required minlength="10" maxlength="2000"></textarea>
         </label>
         <button class="btn solid" type="submit">Send Message</button>
         <p id="form-status" role="status" aria-live="polite"></p>
@@ -99,6 +99,10 @@ const form = document.querySelector<HTMLFormElement>('#contact-form');
 const statusEl = document.querySelector<HTMLParagraphElement>('#form-status');
 
 if (form && statusEl) {
+  form.addEventListener('input', () => {
+    statusEl.textContent = '';
+  });
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -113,6 +117,24 @@ if (form && statusEl) {
       email: String(data.get('email') || ''),
       message: String(data.get('message') || ''),
     };
+
+    payload.name = payload.name.trim();
+    payload.email = payload.email.trim();
+    payload.message = payload.message.trim();
+
+    const nameInput = form.querySelector<HTMLInputElement>('input[name="name"]');
+    const emailInput = form.querySelector<HTMLInputElement>('input[name="email"]');
+    const messageInput = form.querySelector<HTMLTextAreaElement>('textarea[name="message"]');
+
+    if (nameInput) nameInput.value = payload.name;
+    if (emailInput) emailInput.value = payload.email;
+    if (messageInput) messageInput.value = payload.message;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      statusEl.textContent = 'Please fix the highlighted fields.';
+      return;
+    }
 
     const localErrors: string[] = [];
     if (payload.name.trim().length < 2) {
