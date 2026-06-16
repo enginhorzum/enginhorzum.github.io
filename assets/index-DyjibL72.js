@@ -72,22 +72,22 @@
     <section class="panel" id="contact">
       <h2>Contact</h2>
       <p>Send me a message and I will get back to you via enginhorzum@gmail.com.</p>
-      <form id="contact-form" novalidate>
+      <form id="contact-form">
         <label>
           Name
-          <input type="text" name="name" required minlength="2" />
+          <input type="text" name="name" required minlength="2" maxlength="80" />
         </label>
         <label>
           Email
-          <input type="email" name="email" required />
+          <input type="email" name="email" required maxlength="120" />
         </label>
         <label>
           Message
-          <textarea name="message" rows="5" required minlength="10"></textarea>
+          <textarea name="message" rows="5" required minlength="10" maxlength="2000"></textarea>
         </label>
         <button class="btn solid" type="submit">Send Message</button>
         <p id="form-status" role="status" aria-live="polite"></p>
       </form>
     </section>
   </main>
-`;var e=`https://engin-contact.enginhorzum.workers.dev`,t=document.querySelector(`#contact-form`),n=document.querySelector(`#form-status`);t&&n&&t.addEventListener(`submit`,async r=>{r.preventDefault();let i=new FormData(t),a={name:String(i.get(`name`)||``),email:String(i.get(`email`)||``),message:String(i.get(`message`)||``)},o=[];if(a.name.trim().length<2&&o.push(`Name must be at least 2 characters.`),/^\S+@\S+\.\S+$/.test(a.email.trim())||o.push(`Email is not valid.`),a.message.trim().length<10&&o.push(`Message must be at least 10 characters.`),o.length>0){n.textContent=o[0];return}n.textContent=`Sending...`;try{let r=await fetch(e,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify(a)});if(!r.ok){let e=await r.json().catch(()=>null),t=e?.details?.[0]||e?.error||`Request failed (${r.status})`;throw Error(t)}t.reset(),n.textContent=`Thanks. Your message has been sent.`}catch(e){n.textContent=e instanceof Error?e.message:`Something went wrong. Please try again later.`}});
+`;var e=`https://engin-contact.enginhorzum.workers.dev`,t=document.querySelector(`#contact-form`),n=document.querySelector(`#form-status`);t&&n&&(t.addEventListener(`input`,()=>{n.textContent=``}),t.addEventListener(`submit`,async r=>{r.preventDefault();let i=new FormData(t),a={name:String(i.get(`name`)||``),email:String(i.get(`email`)||``),message:String(i.get(`message`)||``)};a.name=a.name.trim(),a.email=a.email.trim(),a.message=a.message.trim();let o=t.querySelector(`input[name="name"]`),s=t.querySelector(`input[name="email"]`),c=t.querySelector(`textarea[name="message"]`);if(o&&(o.value=a.name),s&&(s.value=a.email),c&&(c.value=a.message),!t.checkValidity()){t.reportValidity(),n.textContent=`Please fix the highlighted fields.`;return}let l=[];if(a.name.trim().length<2&&l.push(`Name must be at least 2 characters.`),/^\S+@\S+\.\S+$/.test(a.email.trim())||l.push(`Email is not valid.`),a.message.trim().length<10&&l.push(`Message must be at least 10 characters.`),l.length>0){n.textContent=l[0];return}n.textContent=`Sending...`;try{let r=await fetch(e,{method:`POST`,headers:{"Content-Type":`application/json`},body:JSON.stringify(a)});if(!r.ok){let e=await r.json().catch(()=>null),t=e?.details?.[0]||e?.error||`Request failed (${r.status})`;throw Error(t)}t.reset(),n.textContent=`Thanks. Your message has been sent.`}catch(e){n.textContent=e instanceof Error?e.message:`Something went wrong. Please try again later.`}}));
